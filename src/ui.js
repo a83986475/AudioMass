@@ -213,7 +213,7 @@
 
 		app.listenFor ('ShowError', function( message ) {
 			new PKSimpleModal ({
-				title : 'Oops! Something is not right',
+				title : '哎呀！出了点问题',
 				clss:'pk_modal_anim',
 				ondestroy : function( q ) {
 					app.ui.InteractionHandler.on = false;
@@ -244,13 +244,13 @@
 	function _topbarConfig ( app, ui ) {
 		return [
 			{
-				name:'File',
+				name:'文件',
 				children : [
 					{
-						name: 'Export / Download',
-						action: function () {
+						name: '导出 / 下载',
+							action: function () {
 								new PKSimpleModal({
-								  title:'Export / Download',
+								  title:'导出 / 下载',
 
 								  ondestroy: function( q ) {
 									app.ui.InteractionHandler.on = false;
@@ -259,7 +259,7 @@
 
 								  buttons:[
 									{
-										title:'Export',
+										title:'导出',
 										clss:'pk_modal_a_accpt',
 										callback: function( q ) {
 											var input = q.el_body.getElementsByTagName('input')[0];
@@ -328,11 +328,11 @@
 										}
 									}
 								  ],
-								  body:'<div class="pk_row"><label for="k0">File Name</label>' + 
-									'<input style="min-width:250px" placeholder="mp3 filename" value="audiomass-output.mp3" ' +
+								  body:'<div class="pk_row"><label for="k0">文件名</label>' + 
+									'<input style="min-width:250px" placeholder="音频文件名" value="audiomass-output.mp3" ' +
 									'class="pk_txt" type="text" id="k0" /></div>'+
 
-									'<div class="pk_row" id="frmtex" style="padding-bottom:4px"><label style="display:inline">Format</label>'+
+									'<div class="pk_row" id="frmtex" style="padding-bottom:4px"><label style="display:inline">格式</label>'+
 									'<input type="radio" class="pk_check" id="k01" name="frmtex" checked value="mp3">'+
 									'<label for="k01">mp3</label>' +
 									'<input type="radio" class="pk_check" id="k02" name="frmtex" value="wav">'+  
@@ -369,15 +369,15 @@
 
 									'<div class="pk_row" style="padding-bottom:5px">' +
 									'<input type="radio" class="pk_check" id="k6" name="chnl" checked value="mono">'+
-									'<label for="k6">Mono</label>'+
+									'<label for="k6">单声道</label>'+
 									'<input type="radio" class="pk_check pk_stereo" id="k7" name="chnl" value="stereo">'+
-									'<label for="k7">Stereo</label>'+
+									'<label for="k7">立体声</label>'+
 									'</div>'+
 									'<div class="pk_row">' + 
 									'<input type="radio" class="pk_check" id="k4" name="xport" checked value="whole">'+
-									'<label for="k4">Export whole file</label>'+
+									'<label for="k4">导出整个文件</label>'+
 									'<input type="radio" class="pk_check" id="k5" name="xport" value="sel">'+
-									'<label class="pk_lblmp3" for="k5">Export Selection Only</label></div>',
+									'<label class="pk_lblmp3" for="k5">仅导出选区</label></div>',
 									
 									  setup:function( q ) {
 											var wv = PKAudioEditor.engine.wavesurfer;
@@ -494,7 +494,7 @@
 					},
 
 			                    {
-						name: 'Load from Computer',
+						name: '从电脑加载',
 						type: 'file',
 						action: function ( e ) {
 							app.fireEvent ('RequestLoadLocalFile');
@@ -502,7 +502,7 @@
 					},
 					
 					{
-						name: 'Load Sample File',
+						name: '加载示例文件',
 						action: function ( e ) {
 							if (app.fireEvent ('RequestLoadSampleFile') !== true)
 								app.engine.LoadSample ('test.mp3');
@@ -510,10 +510,10 @@
 					},
 					
 					{
-						name: 'Load From URL',
+						name: '从 URL 加载',
 						action: function ( e ) {
 								new PKSimpleModal({
-								  title:'Load audio from remote url',
+								  title:'从远程地址加载音频',
 								  
 								  ondestroy: function( q ) {
 									app.ui.InteractionHandler.on = false;
@@ -523,7 +523,7 @@
 								  
 								  buttons:[
 									{
-										title:'Load Asset',
+										title:'加载',
 										clss:'pk_modal_a_accpt',
 										callback: function( q ) {
 											var input = q.el_body.getElementsByTagName('input')[0];
@@ -553,14 +553,14 @@
 											}
 											else
 											{
-												OneUp ('Invalid URL entered', 1100);
+												OneUp ('输入的 URL 无效', 1100);
 											}
 											// -
 										}
 									}
 								  ],
-								  body:'<label for="k00">Insert url</label>' + 
-									'<input style="min-width:250px" placeholder="Please insert url" class="pk_txt" type="text" id="k00" />',
+								  body:'<label for="k00">输入网址</label>' + 
+									'<input style="min-width:250px" placeholder="请输入音频文件网址" class="pk_txt" type="text" id="k00" />',
 								  setup:function( q ) {
 
 								  	  app.fireEvent ('RequestPause');
@@ -583,14 +583,14 @@
 					},
 
 					{
-						name: 'New Recording',
+						name: '新建录音',
 						action: function ( e ) {
 							app.fireEvent('RequestActionNewRec');
 						}
 					},
 
 					{
-						name: 'Save Draft Locally',
+						name: '本地保存草稿',
 						clss: 'pk_inact',
 						action: function ( e ) {
 							if (!app.engine.is_ready) return ;
@@ -616,7 +616,7 @@
 
 							// modal that asks for - full file, selection, copy buffer
 							new PKSimpleModal ({
-								title : 'Save Local Draft of...',
+								title : '本地保存草稿...',
 
 								ondestroy : function( q ) {
 									app.ui.InteractionHandler.on = false;
@@ -625,7 +625,7 @@
 
 								buttons:[
 									{
-										title:'Save',
+										title:'保存',
 										clss:'pk_modal_a_accpt',
 										callback: function( q ) {
 											var type = 'whole';
@@ -655,17 +655,17 @@
 									}
 								],
 
-								body:'<p>Please choose source...</p>' +
+								body:'<p>请选择来源...</p>' +
 									'<div class="pk_row"><input type="radio" class="pk_check" id="sl1" name="rdslnc" checked value="whole">'+ 
-									'<label style="vertical-align:top" for="sl1">Whole Track</label>' +
+									'<label style="vertical-align:top" for="sl1">整个音轨</label>' +
 									'<input type="radio" class="pk_check"  id="sl2" name="rdslnc" value="sel">'+
-									'<label style="vertical-align:top" class="pk_lblsel" for="sl2">Selection'+
+									'<label style="vertical-align:top" class="pk_lblsel" for="sl2">选区'+
 									'<i style="display:block;font-size:11px;margin-top:-5px"></i></label>'+
 									'<input type="radio" class="pk_check"  id="sl3" name="rdslnc" value="copy">'+
-									'<label style="vertical-align:top" class="pk_lblsel2" for="sl3">"Copy" clipboard/buffer</label></div>'+
+									'<label style="vertical-align:top" class="pk_lblsel2" for="sl3">"复制"剪贴板/缓冲区</label></div>'+
 
-									'<div class="pk_row"><label for="slk0">Draft Name</label>' + 
-									'<input style="min-width:250px" placeholder="(optional) filename" maxlength="100" ' +
+									'<div class="pk_row"><label for="slk0">草稿名称</label>' + 
+									'<input style="min-width:250px" placeholder="（可选）文件名" maxlength="100" ' +
 									'class="pk_txt" type="text" id="slk0" /></div>',
 
 								setup:function( q ) {
@@ -725,7 +725,7 @@
 										'<div style="padding:2px 0"><img src="' + obj.thumb + '" /></div>';
 
 									new PKSimpleModal ({
-										title : 'Succesfully Stored',
+										title : '已成功保存',
 
 										ondestroy : function( q ) {
 											app.ui.InteractionHandler.on = false;
@@ -734,7 +734,7 @@
 
 										buttons:[
 											{
-												title:'OPEN IN NEW WINDOW',
+												title:'在新窗口中打开',
 												callback: function( q ) {
 													window.open ( window.location.pathname + '?local=' + name);
 
@@ -743,7 +743,7 @@
 											}
 										],
 
-										body:'<p>Open in new window?</p>' + txt,
+										body:'<p>在新窗口中打开？</p>' + txt,
 										setup:function( q ) {
 											app.fireEvent ('RequestPause');
 											app.fireEvent( 'RequestRegionClear');
@@ -759,7 +759,7 @@
 					},
 
 					{
-						name: 'Open Local Drafts',
+						name: '打开本地草稿',
 						action: function ( e ) {
 
 							var datenow = new Date ();
@@ -776,7 +776,7 @@
 
 									var msg = '';
 									if (ret.length === 0) {
-										msg += 'No drafts found...';
+										msg += '未找到草稿...';
 									}
 									else
 									{
@@ -844,7 +844,7 @@
 									app.listenFor ('_lclStart', set_act_btn);
 
 									modal = new PKSimpleModal ({
-										title : 'Local Drafts',
+										title : '本地草稿',
 										clss  : 'pk_bigger',
 
 										ondestroy : function( q ) {
@@ -1000,8 +1000,8 @@
 										if (app.engine.is_ready && !append)
 										{
 											var mm = new PKSimpleModal ({
-												title : 'Open in Existing?',
-												body  : '<div>Open in new window, or in the current one?</div>',
+								title : '在现有窗口中打开？',
+								body  : '<div>在新窗口还是当前窗口打开？</div>',
 												buttons:[
 													{
 														title:'OPEN',
@@ -1013,7 +1013,7 @@
 														}
 													},
 													{
-														title:'OPEN IN NEW',
+														title:'在新窗口打开',
 														clss:'pk_modal_a_accpt',
 														callback: function( q ) {
 															window.open (window.location.pathname + '?local=' + name);
@@ -1048,10 +1048,10 @@
 				]
 			},
 			{
-				name:'Edit',
+				name:'编辑',
 				children:[
 					{
-						name: 'Undo <span class="pk_shrtct">Shft+Z</span>',
+						name: '撤销 <span class="pk_shrtct">Shft+Z</span>',
 						clss: 'pk_inact',
 						action: function () {
 							app.fireEvent ('StateRequestUndo');
@@ -1073,7 +1073,7 @@
 					},
 					
 					{
-						name: 'Redo <span class="pk_shrtct">Shft+Y</span>',
+						name: '重做 <span class="pk_shrtct">Shft+Y</span>',
 						clss: 'pk_inact',
 						action: function () {
 							app.fireEvent ('StateRequestRedo');
@@ -1095,35 +1095,35 @@
 					},
 
 					{
-						name: 'Play <span class="pk_shrtct">Space</span>',
+						name: '播放 <span class="pk_shrtct">Space</span>',
 						action: function () {
 							app.fireEvent ('RequestPlay');
 						}
 					},
 					
 					{
-						name: 'Stop',
+						name: '停止',
 						action: function () {
 							app.fireEvent ('RequestStop');
 						}
 					},
 					
 					{
-						name: 'Select All <span class="pk_shrtct">Shft+A</span>',
+						name: '全选 <span class="pk_shrtct">Shft+A</span>',
 						action: function () {
 							app.fireEvent ('RequestSelect');
 						}
 					},
 					
 					{
-						name: 'Deselect All <span class="pk_shrtct">~</span>',
+						name: '取消全选 <span class="pk_shrtct">~</span>',
 						action: function () {
 							app.fireEvent ('RequestDeselect');
 						}
 					},
 
 					{
-						name   : 'Channel Info/Flip',
+						name   : '声道信息/翻转',
 						action : function () {
 							app.fireEvent ('RequestActionFXUI_Flip');
 						},
@@ -1139,14 +1139,14 @@
 					},
 
 					{
-						name:'Seamless Loop',
+						name:'无缝循环',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_SeamlessLoop');
 						}
 					},
 
 					{
-						name: 'Zero Cross Selection',
+						name: '零交叉选择',
 						action: function () {
 							app.fireEvent ('RequestSnapSelDrag');
 						},
@@ -1160,45 +1160,45 @@
 					]
 				},
 			{
-				name:'Effects',
+				name:'效果',
 				children:[
 					{
-						name:'Gain',
+						name:'增益',
 						action:function () {
 							app.fireEvent ('RequestFXUI_Gain');
 						}
 					},
 
 					{
-						name:'Fade In',
+						name:'淡入',
 						action:function () {
 							app.fireEvent ('RequestActionFX_FadeIn');
 						}
 					},
 
 					{
-						name:'Fade Out',
+						name:'淡出',
 						action:function () {
 							app.fireEvent ('RequestActionFX_FadeOut');
 						}
 					},
 
                     {
-                        name: "Noise Reduction (Voice)",
+                        name: '降噪（人声）',
                         action: function () {
                             app.fireEvent("RequestActionFX_NoiseRNN");
                         },
                     },
 
 					{
-						name   : 'Paragraphic EQ',
+						name   : '参量均衡器',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_ParaGraphicEQ');
 						}
 					},
 
 					{
-						name:'Compressor',
+						name:'压缩器',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_Compressor');
 						}
@@ -1206,42 +1206,42 @@
 
 
 					{
-						name   : 'Normalize',
+						name   : '标准化',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_Normalize');
 						}
 					},
 
 					{
-						name   : 'Graphic EQ',
+						name   : '图形均衡器',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_GraphicEQ', 10);
 						}
 					},
 
 					{
-						name   : 'Graphic EQ (20 bands)',
+						name   : '图形均衡器（20 频段）',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_GraphicEQ', 20);
 						}
 					},
 
 					{
-						name   : 'Hard Limiter',
+						name   : '硬限制器',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_HardLimiter');
 						}
 					},
 
 					{
-						name   : 'Delay',
+						name   : '延迟',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_Delay');
 						}
 					},
 
 					{
-						name:'Distortion',
+						name:'失真',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_Distortion');
 						}
@@ -1249,49 +1249,49 @@
 
 
 					{
-						name:'Reverb',
+						name:'混响',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_Reverb');
 						}
 					},
 
 					{
-						name:'Audio Repair',
+						name:'音频修复',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_Repair');
 						}
 					},
 
 					{
-						name   : 'Speed Up / Slow Down (pitch)',
+						name   : '加速/减速（变调）',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_Speed');
 						}
 					},
 
 					{
-						name : 'Speed / Playback Rate',
+						name : '速度/播放速率',
 						action:function () {
 							app.fireEvent ('RequestActionFXUI_Rate');
 						}
 					},
 
 					{
-						name   : 'Reverse',
+						name   : '反向',
 						action : function () {
 							app.fireEvent ('RequestActionFX_Reverse');
 						}
 					},
 					
 					{
-						name   : 'Invert',
+						name   : '反相',
 						action : function () {
 							app.fireEvent ('RequestActionFX_Invert');
 						}
 					},
 
 					{
-						name   : 'Remove Silence',
+						name   : '移除静音',
 						action : function () {
 							app.fireEvent ('RequestActionFX_RemSil');
 						}
@@ -1300,10 +1300,10 @@
 				]
 			},
 			{
-				name:'View',
+				name:'视图',
 				children:[
 					{
-						name:'Follow Cursor  &#10004;',
+						name:'跟随光标  &#10004;',
 						action: function ( obj ) {
 							app.fireEvent ('RequestViewFollowCursorToggle');
 						},
@@ -1311,7 +1311,7 @@
 							// perhaps read from stored settings?
 
 							app.listenFor ('DidViewFollowCursorToggle', function ( val ) {
-								var txt = 'Follow Cursor';
+								var txt = '跟随光标';
 
 								if (val) {
 									obj.innerHTML = txt + ' &#10004;';
@@ -1323,13 +1323,13 @@
 					},
 
 					{
-						name:'Peak Separators &#10004;',
+						name:'峰值分隔线 &#10004;',
 						action: function ( obj ) {
 							app.fireEvent ('RequestViewPeakSeparatorToggle');
 						},
 						setup: function ( obj ) {
 							app.listenFor ('DidViewPeakSeparatorToggle', function ( val ) {
-								var txt = 'Peak Separators';
+								var txt = '峰值分隔线';
 								if (val) {
 									obj.innerHTML = txt + ' &#10004;';
 								} else {
@@ -1340,13 +1340,13 @@
 					},
 
 					{
-						name:'Timeline &#10004;',
+						name:'时间轴 &#10004;',
 						action: function ( obj ) {
 							app.fireEvent ('RequestViewTimelineToggle');
 						},
 						setup: function ( obj ) {
 							app.listenFor ('DidViewTimelineToggle', function ( val ) {
-								var txt = 'Timeline';
+								var txt = '时间轴';
 								if (val) {
 									obj.innerHTML = txt + ' &#10004;';
 								} else {
@@ -1361,7 +1361,7 @@
 					},
 
 					{
-						name:'Frequency Analyser',
+						name:'频率分析器',
 						action: function ( obj ) {
 							app.fireEvent ('RequestShowFreqAn', 'eq', [1]);
 						},
@@ -1369,7 +1369,7 @@
 							app.listenFor ('DidToggleFreqAn', function ( url, val ) {
 								if (url !== 'eq') return ;
 
-								var txt = 'Frequency Analyser';
+								var txt = '频率分析器';
 								if (val) {
 									obj.innerHTML = txt + ' &#10004;';
 								} else {
@@ -1380,7 +1380,7 @@
 					},
 
 					{
-						name:'Spectrum Analyser',
+						name:'频谱分析器',
 						action: function ( obj ) {
 							app.fireEvent ('RequestShowFreqAn', 'sp', [1]);
 						},
@@ -1388,7 +1388,7 @@
 							app.listenFor ('DidToggleFreqAn', function ( url, val ) {
 								if (url !== 'sp') return ;
 
-								var txt = 'Spectrum Analyser';
+								var txt = '频谱分析器';
 								if (val) {
 									obj.innerHTML = txt + ' &#10004;';
 								} else {
@@ -1399,7 +1399,7 @@
 					},
 
 					{
-						name:'Multitrack Mixer',
+						name:'多轨混音器',
 						action: function ( obj ) {
 							var mt = app.multitrack;
 							if (mt && mt.IsOn && !mt.IsOn ()) mt.Toggle ( true );
@@ -1409,7 +1409,7 @@
 							app.listenFor ('DidToggleFreqAn', function ( url, val ) {
 								if (url !== 'mix') return ;
 
-								var txt = 'Multitrack Mixer';
+								var txt = '多轨混音器';
 								if (val) {
 									obj.innerHTML = txt + ' &#10004;';
 								} else {
@@ -1420,14 +1420,14 @@
 					},
 
 					{
-						name:'Tempo Tools',
+						name:'节奏工具',
 						action: function ( obj ) {
 							app.fireEvent ('RequestActionTempo');
 						}
 					},
 
 					{
-						name:'ID3 Tags',
+						name:'ID3 标签',
 						action: function ( obj ) {
 							app.fireEvent ('RequestActionID3');
 						}
@@ -1438,14 +1438,14 @@
 					},
 
 					{
-						name:'Center to Cursor <span class="pk_shrtct">[Tab]</span>',
+						name:'居中到光标 <span class="pk_shrtct">[Tab]</span>',
 						action: function ( obj ) {
 							app.fireEvent ('RequestViewCenterToCursor');
 						}
 					},
 
 					{
-						name:'Reset Zoom <span class="pk_shrtct">[0]</span>',
+						name:'重置缩放 <span class="pk_shrtct">[0]</span>',
 						action: function ( obj ) {
 							app.fireEvent ('RequestZoomUI', 0);
 						}
@@ -1454,10 +1454,10 @@
 				]
 			},
 			{
-				name:'Help',
+				name:'帮助',
 				children:[
 					{
-						name   : 'Store Offline Version',
+						name   : '存储离线版本',
 						action : function () {
 							if (window.location.href.indexOf('-cache') > 0) {
 
@@ -1516,7 +1516,7 @@
 						setup: function ( obj ) {
 							if (window.location.href.indexOf('-cache') > 0)
 							{
-								obj.innerHTML = 'Update Offline Version';
+								obj.innerHTML = '更新离线版本';
 							}
 						}
 					},
@@ -1526,14 +1526,14 @@
 					},
 
 					{
-						name   : 'About',
+						name   : '关于',
 						action : function () {
 							window.open ('/about.html');
 						}
 					},
 
 					{
-						name   : 'See Welcome Message',
+						name   : '查看欢迎信息',
 						action : function () {
 							PKAudioEditor._deps.Wlc ();
 						}
@@ -1550,7 +1550,7 @@
 					// },
 
 					{
-						name   : 'SourceCode on Github',
+						name   : 'GitHub 源代码',
 						action : function () {
 							window.open ('https://github.com/pkalogiros/audiomass');
 						}
