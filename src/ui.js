@@ -765,11 +765,11 @@
 							var datenow = new Date ();
 							var time_ago = function ( arg ) {
 							    var a = (datenow - arg) / 1E3 >> 0;
-							    if (59 >= a) return datenow = 1 < a ? 's' : '', a + ' second' + datenow + ' ago';
-							    if (60 <= a && 3599 >= a) return a = Math.floor(a / 60), a + ' minute' + (1 < a ? 's' : '') + ' ago';
-							    if (3600 <= a && 86399 >= a) return a = Math.floor(a / 3600), a + ' hour' + (1 < a ? 's' : '') + ' ago';
-							    if (86400 <= a && 2592030 >= a) return a = Math.floor(a / 86400), a + ' day' + (1 < a ? 's' : '') + ' ago';
-							    if (2592031 <= a) return a = Math.floor(a / 2592E3), a + ' month' + (1 < a ? 's' : '') + ' ago';
+							    if (59 >= a) return a + ' 秒前';
+							    if (60 <= a && 3599 >= a) return a = Math.floor(a / 60), a + ' 分钟前';
+							    if (3600 <= a && 86399 >= a) return a = Math.floor(a / 3600), a + ' 小时前';
+							    if (86400 <= a && 2592030 >= a) return a = Math.floor(a / 86400), a + ' 天前';
+							    if (2592031 <= a) return a = Math.floor(a / 2592E3), a + ' 个月前';
 							};
 							var func = function ( fls ) {								
 								fls.ListSessions(function( ret ) {
@@ -797,20 +797,20 @@
 											var chns     = (curr.chans === 1 ? 'mono' : 'stereo');
 
 											msg += '<div id="pk_' + curr.id + '" class="pk_lcldrf">'+
-											'<div style="padding-bottom:2px"><span><i class="pk_i">name:</i>' + filename + '</span></div>' +
-											'<div><span class="pk_lcls"><i class="pk_i">id:</i><strong>' + curr.id + '</strong><br/><i class="pk_i">chn:</i>'+ chns +'</span>' + 
-											'<span class="pk_lcls" style="width:50%;text-align:center"><i class="pk_i">date:</i><span>' + datestr + '<br/>'+ agostr +'</span></span>' +
-											'<span style="text-align:right;float:right" class="pk_lcls"><i class="pk_i">durr:</i>' + duration + 's</span></div><div>' +
+											'<div style="padding-bottom:2px"><span><i class="pk_i">名称：</i>' + filename + '</span></div>' +
+											'<div><span class="pk_lcls"><i class="pk_i">ID：</i><strong>' + curr.id + '</strong><br/><i class="pk_i">声道：</i>'+ chns +'</span>' + 
+											'<span class="pk_lcls" style="width:50%;text-align:center"><i class="pk_i">日期：</i><span>' + datestr + '<br/>'+ agostr +'</span></span>' +
+											'<span style="text-align:right;float:right" class="pk_lcls"><i class="pk_i">时长：</i>' + duration + 's</span></div><div>' +
 
 											'<img class="pk_lcli" src="' + thumb + '" />' +
-											'<a class="pk_lcla2" onclick="PKAudioEditor.fireEvent(\'LoadDraft\',\'' + curr.id + '\', 3);">PLAY</a>' +
-											'<a class="pk_lcla" onclick="PKAudioEditor.fireEvent(\'LoadDraft\',\'' + curr.id + '\');">Open</a>';
+											'<a class="pk_lcla2" onclick="PKAudioEditor.fireEvent(\'LoadDraft\',\'' + curr.id + '\', 3);">播放</a>' +
+											'<a class="pk_lcla" onclick="PKAudioEditor.fireEvent(\'LoadDraft\',\'' + curr.id + '\');">打开</a>';
 
 											if (app.engine.is_ready) {
-												msg += '<a onclick="PKAudioEditor.fireEvent(\'LoadDraft\',\'' + curr.id +
-												 '\',1);" class="pk_lcla">Append to Current Track</a>';
+										msg += '<a onclick="PKAudioEditor.fireEvent(\'LoadDraft\',\'' + curr.id +
+										 '\',1);" class="pk_lcla">追加到当前轨道</a>';
 											}
-											msg += '<a class="pk_lcla" style="color:#ad2b2b" onclick="PKAudioEditor.fireEvent(\'LoadDraft\',\'' + curr.id + '\',2);">Del</a>';
+											msg += '<a class="pk_lcla" style="color:#ad2b2b" onclick="PKAudioEditor.fireEvent(\'LoadDraft\',\'' + curr.id + '\',2);">删除</a>';
 											msg += '</div></div>';
 										}
 									}
@@ -920,7 +920,7 @@
 												if (el)
 												{
 													if ( el.parentNode.children.length === 1 ) {
-														el.parentNode.innerHTML = 'No drafts found...';
+														el.parentNode.innerHTML = '未找到草稿...';
 													}
 													else el.parentNode.removeChild(el);
 
@@ -1151,7 +1151,7 @@
 							app.fireEvent ('RequestSnapSelDrag');
 						},
 						setup: function ( obj ) {
-							var txt = 'Zero Cross Selection';
+							var txt = '零交叉选择';
 							function set ( val ) { obj.innerHTML = txt + (val ? ' &#10004;' : ''); }
 							set (!w.localStorage || w.localStorage.pk_snapzc !== '0');
 							app.listenFor ('DidSnapSelDrag', set);
@@ -1462,11 +1462,11 @@
 							if (window.location.href.indexOf('-cache') > 0) {
 
 								function onUpdateReady ( e ) {
-									if (confirm ('Would you like to refresh the page to load the newer version?'))
+									if (confirm ('是否刷新页面以加载新版本？'))
 										window.location.reload();
 								}
 								function downLoading ( e ) {
-									OneUp ('Downloading newer version', 1500);
+									OneUp ('正在下载新版本', 1500);
 								}
 
 								window.applicationCache.onupdateready = onUpdateReady;
@@ -1481,10 +1481,10 @@
 								return ;
 							}
 
-							var message = 'This will open a new window that will try to store a local version in your browser'; // nicer text
+							var message = '这将打开一个新窗口，尝试在浏览器中存储离线版本'; // nicer text
 
 							new PKSimpleModal ({
-								title : 'Open Offline Version?',
+								title : '打开离线版本？',
 
 								ondestroy : function( q ) {
 									app.ui.InteractionHandler.on = false;
@@ -2438,7 +2438,7 @@
 		// play button
 		var btn_stop = d.createElement ('button');
 		btn_stop.setAttribute ('tabIndex', -1);
-		btn_stop.innerHTML = '<span>Stop Playback (Space)</span>';
+		btn_stop.innerHTML = '<span>停止播放 (Space)</span>';
 		btn_stop.className = 'pk_btn pk_stop icon-stop2';
 		btn_stop.onclick = function() {
 			UI.fireEvent('RequestStop');
@@ -2761,7 +2761,7 @@
 		var btn_back_total = d.createElement ('button');
 		btn_back_total.setAttribute('tabIndex', -1);
 		btn_back_total.className = 'pk_btn icon-previous2';
-		btn_back_total.innerHTML = '<span>Seek Start (Shift + left arrow)</span>';
+		btn_back_total.innerHTML = '<span>定位起点 (Shift + ←)</span>';
 		transport.appendChild ( btn_back_total );
 		btn_back_total.onclick = function() {
 			seekRegionMarkerEdgeFor (PKAE, -1);
@@ -2771,7 +2771,7 @@
 		var btn_front_total = d.createElement ('button');
 		btn_front_total.setAttribute('tabIndex', -1);
 		btn_front_total.className = 'pk_btn icon-next2';
-		btn_front_total.innerHTML = '<span>Seek End (Shift + right arrow)</span>';
+		btn_front_total.innerHTML = '<span>定位终点 (Shift + →)</span>';
 		btn_front_total.onclick = function() {
 			seekRegionMarkerEdgeFor (PKAE, 1);
 			this.blur();
@@ -3312,7 +3312,7 @@
 		var copy_btn = d.createElement ('button');
 		copy_btn.setAttribute('tabIndex', -1);
 		copy_btn.className = 'pk_btn icon-files-empty pk_inact';
-		copy_btn.innerHTML = '<span>Copy Selection (Shift + C)</span>';
+		copy_btn.innerHTML = '<span>复制选区 (Shift + C)</span>';
 		actions.appendChild ( copy_btn );
 
 		copy_btn.onclick = function() {
@@ -3330,7 +3330,7 @@
 		var paste_btn = d.createElement ('button');
 		paste_btn.setAttribute('tabIndex', -1);
 		paste_btn.className = 'pk_btn icon-file-text2 pk_inact';
-		paste_btn.innerHTML = '<span>Paste Selection (Shift + V)</span>';
+		paste_btn.innerHTML = '<span>粘贴选区 (Shift + V)</span>';
 		actions.appendChild ( paste_btn );
 
 		paste_btn.onclick = function() {
@@ -3341,7 +3341,7 @@
 		var cut_btn = d.createElement ('button');
 		cut_btn.setAttribute('tabIndex', -1);
 		cut_btn.className = 'pk_btn icon-scissors pk_inact';
-		cut_btn.innerHTML = '<span>Cut Selection (Shift + X)</span>';
+		cut_btn.innerHTML = '<span>剪切选区 (Shift + X)</span>';
 		actions.appendChild ( cut_btn );
 
 		cut_btn.onclick = function() {
@@ -3379,8 +3379,7 @@
 		
 		var selection = d.createElement( 'div' );
 		selection.className = 'pk_selection';
-		selection.innerHTML = '<div class="pk_sellist">' + 
-			'<span class="pk_title">Selection:</span>' + 
+		selection.innerHTML = '<div class="pk_sellist">' +									'<span class="pk_title">选区：</span>' + 
 			'<div><span class="title">Start:</span><span class="s_s pk_dat">-</span></div>' + 
 			'<div><span class="title">End:</span><span class="s_e pk_dat">-</span></div>' + 
 			'<div><span  class="title">Duration:</span><span class="s_d pk_dat">-</span></div>' +
@@ -3389,7 +3388,7 @@
 		var btn_clear_selection = d.createElement ('button');
 		btn_clear_selection.setAttribute('tabIndex', -1);
 		btn_clear_selection.className = 'pk_btn icon-clearsel pk_inact';
-		btn_clear_selection.innerHTML = '<span>Clear Selection (Q key)</span>';
+		btn_clear_selection.innerHTML = '<span>清除选区 (Q 键)</span>';
 
 		var sel_spans = selection.getElementsByClassName('pk_dat');
 		var sb = null, sr = null, sd = 0;
